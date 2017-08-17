@@ -1,14 +1,14 @@
 ## What is this container?
-This **extremely tiny container** is built using secure alpine-linux. Just **~18MB** (~36MB uncompressed), can you beleive it? Enjoy!
+This **extremely tiny container** is built using secure Alpine-Linux. Just **~12MB** (becomes ~36MB when uncompressed). Can you believe it? Enjoy!
 
 ## How to run it?
 
 Simple test 
 ```
-docker run --name=mariadb-micro -d -p 3306:3306 alpined/mariadb-micro
+docker run --name=mariadb-micro -d alpined/mariadb-micro
 ```
 
-Or specify your own data folder through volume mounting
+Or expose port and specify your own data folder through volume mounting
 ```
 docker run --name=mariadb-micro -d --restart=unless-stopped \
 -p 3306:3306 -v /var/lib/mysql:/var/lib/mysql \
@@ -25,7 +25,8 @@ Test it! :-)
 ```
 docker exec -it mariadb-micro /bin/sh
 ```
-Available commands from mysql-client package -> /usr/bin/mysql /usr/bin/mysqldump
+
+Available commands from mysql-client package -> `/usr/bin/mysql` & `/usr/bin/mysqldump`
 
 ## What are available volume mounts?
 

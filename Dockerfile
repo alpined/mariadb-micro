@@ -6,6 +6,9 @@ COPY rootfs /
 # container builder, let sh run it
 RUN /bin/sh /scripts/build.sh
 
+# port
+EXPOSE 3306
+
 # volumes
 VOLUME ["/var/lib/mysql"]
 
