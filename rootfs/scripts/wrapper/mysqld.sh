@@ -40,11 +40,11 @@ else
 
 cat <<- EOF > $tfile
         USE mysql;
-        UPDATE user SET host = '%' WHERE host = '$(hostname)';
+        DELETE FROM user WHERE user = 'root' AND host NOT IN ('localhost', '127.0.0.1', '::1');
         FLUSH PRIVILEGES;
         GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
         GRANT ALL PRIVILEGES ON *.* TO 'root'@'127.0.0.1' WITH GRANT OPTION;
-        GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+        GRANT ALL PRIVILEGES ON *.* TO 'root'@'::1' WITH GRANT OPTION;
         UPDATE user SET password=PASSWORD("$MYSQL_ROOT_PASSWORD") WHERE user='root';
         FLUSH PRIVILEGES;
         DROP DATABASE test;
