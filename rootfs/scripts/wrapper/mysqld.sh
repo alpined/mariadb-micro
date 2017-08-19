@@ -1,15 +1,5 @@
 #!/bin/sh
 
-# execute any pre-init scripts, useful for images
-# based on this image
-for i in /scripts/pre-init.d/*.sh
-do
-    if [ -e "${i}" ]; then
-        echo "[INFO] pre-init.d - processing $i"
-        . "${i}"
-    fi
-done
-
 if [ ! -d "/run/mysqld" ]; then
     mkdir -p /run/mysqld
     chown -R mysql:mysql /run/mysqld
@@ -28,6 +18,11 @@ else
         MYSQL_ROOT_PASSWORD=$(pwgen 16 1)
         echo "[INFO] MySQL root Password: $MYSQL_ROOT_PASSWORD"
     fi
+
+cat <<- EOF > ~/.my.cnf
+    [client]
+    password="$MYSQL_ROOT_PASSWORD"
+EOF
 
     MYSQL_DATABASE=${MYSQL_DATABASE:-""}
     MYSQL_USER=${MYSQL_USER:-""}
@@ -63,15 +58,5 @@ EOF
     /usr/bin/mysqld --user=mysql --bootstrap --verbose=0 < $tfile
     rm -f $tfile
 fi
-
-# execute any pre-exec scripts, useful for images
-# based on this image
-for i in /scripts/pre-exec.d/*.sh
-do
-    if [ -e "${i}" ]; then
-        echo "[INFO] pre-exec.d - processing $i"
-        . ${i}
-    fi
-done
 
 exec /usr/bin/mysqld --user=mysql --console
