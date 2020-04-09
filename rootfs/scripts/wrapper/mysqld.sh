@@ -59,4 +59,4 @@ EOF
     rm -f $tfile
 fi
 
-exec /usr/bin/mysqld --user=mysql --datadir='/var/lib/mysql' --console
+exec /usr/bin/mysqld --user=mysql --datadir='/var/lib/mysql' --skip_networking=0 --console

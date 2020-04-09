@@ -1,5 +1,5 @@
 
-find /scripts/ -name "*.sh" -exec chmod 755 {} \;
+find /scripts/ -name "*.sh" | xargs chmod 755
 
 for ff in /scripts/build.d/*.sh
 do
@@ -10,3 +10,5 @@ do
 		mv ${ff} ${ff}-executed
 	fi
 done
+
+rm -fr /tmp/* /var/cache/apk/*

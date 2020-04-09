@@ -11,7 +11,7 @@ docker run --name=mariadb-micro -d alpined/mariadb-micro
 Or expose port and specify your own data folder through volume mounting
 ```
 docker run --name=mariadb-micro -d --restart=unless-stopped \
--p 3306:3306 -v /var/lib/mysql:/var/lib/mysql \
+-p 3306:3306 -v $(pwd)/mysql-data:/var/lib/mysql \
 alpined/mariadb-micro
 ```
 ... and your mysql server is ready!
