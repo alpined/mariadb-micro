@@ -1,5 +1,7 @@
 ## What is this container?
-This **extremely tiny container** is built using secure Alpine-Linux. Just **~12MB** (becomes ~36MB when uncompressed). Can you believe it? Enjoy!
+This **extremely tiny container** is built using secure Alpine-Linux. Less than **14 MB**, which expands to ~44 MB when uncompressed. 
+
+Enjoy!
 
 ## How to run it?
 
